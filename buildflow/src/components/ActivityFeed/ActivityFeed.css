@@ -1,0 +1,91 @@
+.activity-feed {
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.activity-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.activity-icon-update {
+  background-color: #eff6ff;
+}
+.activity-icon-update svg {
+  stroke: #3b82f6;
+}
+
+.activity-icon-order {
+  background-color: #f3f4f6;
+}
+.activity-icon-order svg {
+  stroke: #6b7280;
+}
+
+.activity-icon-invoice {
+  background-color: #f0fdf4;
+}
+.activity-icon-invoice svg {
+  stroke: #22c55e;
+}
+
+.activity-icon-risk {
+  background-color: #fef3c7;
+}
+.activity-icon-risk svg {
+  stroke: #d97706;
+}
+
+.activity-icon-team {
+  background-color: #ede9fe;
+}
+.activity-icon-team svg {
+  stroke: #7c3aed;
+}
+
+.activity-icon-milestone {
+  background-color: #d1fae5;
+}
+.activity-icon-milestone svg {
+  stroke: #059669;
+}
+
+.activity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-message {
+  font-size: 13px;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.activity-time {
+  font-size: 12px;
+  color: #9ca3af;
+}

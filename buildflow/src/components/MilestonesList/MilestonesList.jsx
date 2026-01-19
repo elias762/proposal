@@ -3,7 +3,7 @@ import './MilestonesList.css';
 function MilestonesList({ milestones }) {
   const formatDate = (dateStr) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', {
+    return date.toLocaleDateString('it-IT', {
       day: 'numeric',
       month: 'short',
     });
@@ -31,7 +31,7 @@ function MilestonesList({ milestones }) {
               <div className="milestone-header">
                 <span className="milestone-title">{milestone.title}</span>
                 <span className="milestone-countdown">
-                  {daysUntil <= 0 ? 'Today' : `in ${daysUntil}d`}
+                  {daysUntil <= 0 ? 'Oggi' : `tra ${daysUntil}g`}
                 </span>
               </div>
               <div className="milestone-meta">

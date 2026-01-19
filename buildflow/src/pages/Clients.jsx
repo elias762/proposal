@@ -26,7 +26,7 @@ function Clients() {
   const formatDate = (dateStr) => {
     if (!dateStr) return '-';
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', {
+    return date.toLocaleDateString('it-IT', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
@@ -40,8 +40,8 @@ function Clients() {
   return (
     <div className="clients-page">
       <Header
-        title="Clients"
-        subtitle="Client profiles, history, and proposal activity."
+        title="Clienti"
+        subtitle="Profili clienti, storico e attività preventivi."
       />
 
       <div className="clients-content">
@@ -53,13 +53,17 @@ function Clients() {
             </svg>
             <input
               type="text"
-              placeholder="Search by client name or industry..."
+              placeholder="Cerca per nome cliente o settore..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <button className="btn-add-client">
-            + Add Client
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Nuovo Cliente
           </button>
         </div>
 
@@ -68,12 +72,12 @@ function Clients() {
             <table className="clients-table">
               <thead>
                 <tr>
-                  <th>Client Name</th>
-                  <th>Industry</th>
-                  <th>Active Projects</th>
-                  <th>Completed</th>
-                  <th>Proposals</th>
-                  <th>Last Activity</th>
+                  <th>Nome Cliente</th>
+                  <th>Settore</th>
+                  <th>Progetti Attivi</th>
+                  <th>Completati</th>
+                  <th>Preventivi</th>
+                  <th>Ultima Attività</th>
                 </tr>
               </thead>
               <tbody>
@@ -115,7 +119,7 @@ function Clients() {
             </table>
             {filteredClients.length === 0 && (
               <div className="no-results">
-                <p>No clients found matching "{searchTerm}"</p>
+                <p>Nessun cliente trovato per "{searchTerm}"</p>
               </div>
             )}
           </div>

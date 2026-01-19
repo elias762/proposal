@@ -19,8 +19,8 @@ function ProjectDetails() {
     return (
       <div className="project-details">
         <div className="not-found">
-          <h2>Project not found</h2>
-          <button onClick={() => navigate('/projects')}>Back to Projects</button>
+          <h2>Progetto Non Trovato</h2>
+          <button onClick={() => navigate('/projects')}>Torna ai Progetti</button>
         </div>
       </div>
     );
@@ -29,7 +29,7 @@ function ProjectDetails() {
   const formatDate = (dateStr) => {
     if (!dateStr) return '-';
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', {
+    return date.toLocaleDateString('it-IT', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
@@ -38,7 +38,7 @@ function ProjectDetails() {
 
   const formatBudget = (budget) => {
     if (typeof budget === 'number') {
-      return `€${budget.toLocaleString('de-DE')}`;
+      return `€${budget.toLocaleString('it-IT')}`;
     }
     return budget;
   };
@@ -58,6 +58,21 @@ function ProjectDetails() {
     }
   };
 
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case 'On Track':
+        return 'In Linea';
+      case 'At Risk':
+        return 'A Rischio';
+      case 'Delayed':
+        return 'In Ritardo';
+      case 'Completed':
+        return 'Completato';
+      default:
+        return status;
+    }
+  };
+
   const getMilestoneStatusClass = (status) => {
     switch (status) {
       case 'Done':
@@ -66,6 +81,19 @@ function ProjectDetails() {
         return 'milestone-in-progress';
       default:
         return 'milestone-not-started';
+    }
+  };
+
+  const getMilestoneStatusLabel = (status) => {
+    switch (status) {
+      case 'Done':
+        return 'Completato';
+      case 'In Progress':
+        return 'In Corso';
+      case 'Not Started':
+        return 'Non Iniziato';
+      default:
+        return status;
     }
   };
 
@@ -79,6 +107,19 @@ function ProjectDetails() {
         return 'severity-low';
       default:
         return '';
+    }
+  };
+
+  const getSeverityLabel = (severity) => {
+    switch (severity) {
+      case 'High':
+        return 'Alto';
+      case 'Medium':
+        return 'Medio';
+      case 'Low':
+        return 'Basso';
+      default:
+        return severity;
     }
   };
 
@@ -117,7 +158,7 @@ function ProjectDetails() {
     <div className="project-details">
       <div className="details-header">
         <button className="back-button" onClick={() => navigate('/projects')}>
-          ← Back to Projects
+          ← Torna ai Progetti
         </button>
         <div className="header-content">
           <div className="header-left">
@@ -128,7 +169,7 @@ function ProjectDetails() {
               <span className="meta-item">{project.location}</span>
               <span className="meta-divider">•</span>
               <span className={`status-badge ${getStatusClass(project.status)}`}>
-                {project.status}
+                {getStatusLabel(project.status)}
               </span>
             </div>
           </div>
@@ -138,21 +179,21 @@ function ProjectDetails() {
       <div className="details-content">
         <div className="details-grid">
           <div className="main-column">
-            {/* Project Overview */}
+            {/* Panoramica Progetto */}
             <section className="details-section">
-              <h2 className="section-title">Project Overview</h2>
+              <h2 className="section-title">Panoramica Progetto</h2>
               <div className="overview-card">
                 <div className="overview-grid">
                   <div className="overview-item">
-                    <span className="overview-label">Client</span>
+                    <span className="overview-label">Cliente</span>
                     <span className="overview-value">{project.client}</span>
                   </div>
                   <div className="overview-item">
-                    <span className="overview-label">Type</span>
+                    <span className="overview-label">Tipologia</span>
                     <span className="overview-value">{project.type}</span>
                   </div>
                   <div className="overview-item">
-                    <span className="overview-label">Location</span>
+                    <span className="overview-label">Località</span>
                     <span className="overview-value">{project.location || '-'}</span>
                   </div>
                   <div className="overview-item">
@@ -160,11 +201,11 @@ function ProjectDetails() {
                     <span className="overview-value">{project.projectManager}</span>
                   </div>
                   <div className="overview-item">
-                    <span className="overview-label">Start Date</span>
+                    <span className="overview-label">Data Inizio</span>
                     <span className="overview-value">{formatDate(project.startDate)}</span>
                   </div>
                   <div className="overview-item">
-                    <span className="overview-label">Target End Date</span>
+                    <span className="overview-label">Data Fine Prevista</span>
                     <span className="overview-value">{formatDate(project.targetEndDate)}</span>
                   </div>
                   <div className="overview-item">
@@ -172,21 +213,21 @@ function ProjectDetails() {
                     <span className="overview-value budget-value">{formatBudget(project.budget)}</span>
                   </div>
                   <div className="overview-item">
-                    <span className="overview-label">Status</span>
+                    <span className="overview-label">Stato</span>
                     <span className={`status-badge ${getStatusClass(project.status)}`}>
-                      {project.status}
+                      {getStatusLabel(project.status)}
                     </span>
                   </div>
                 </div>
                 {project.scopeSummary && (
                   <div className="scope-summary">
-                    <span className="overview-label">Scope Summary</span>
+                    <span className="overview-label">Descrizione Progetto</span>
                     <p className="scope-text">{project.scopeSummary}</p>
                   </div>
                 )}
                 {project.constraints && project.constraints.length > 0 && (
                   <div className="constraints-section">
-                    <span className="overview-label">Key Constraints</span>
+                    <span className="overview-label">Vincoli Principali</span>
                     <div className="constraints-list">
                       {project.constraints.map((constraint, index) => (
                         <span key={index} className="constraint-badge">
@@ -199,15 +240,15 @@ function ProjectDetails() {
               </div>
             </section>
 
-            {/* Timeline / Milestones */}
+            {/* Cronoprogramma / Milestone */}
             <section className="details-section">
               <div className="section-header">
-                <h2 className="section-title">Timeline / Milestones</h2>
+                <h2 className="section-title">Cronoprogramma / Milestone</h2>
                 <button
                   className="btn-add"
                   onClick={() => setIsMilestoneModalOpen(true)}
                 >
-                  + Add Milestone
+                  + Aggiungi Milestone
                 </button>
               </div>
               <div className="milestones-card">
@@ -221,26 +262,26 @@ function ProjectDetails() {
                           <span className="milestone-date">{formatDate(milestone.dueDate)}</span>
                         </div>
                         <span className={`milestone-badge ${getMilestoneStatusClass(milestone.status)}`}>
-                          {milestone.status}
+                          {getMilestoneStatusLabel(milestone.status)}
                         </span>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p className="empty-message">No milestones defined yet.</p>
+                  <p className="empty-message">Nessuna milestone definita.</p>
                 )}
               </div>
             </section>
 
-            {/* Risks */}
+            {/* Rischi */}
             <section className="details-section">
               <div className="section-header">
-                <h2 className="section-title">Risks</h2>
+                <h2 className="section-title">Rischi</h2>
                 <button
                   className="btn-add"
                   onClick={() => setIsRiskModalOpen(true)}
                 >
-                  + Add Risk
+                  + Aggiungi Rischio
                 </button>
               </div>
               <div className="risks-card">
@@ -251,30 +292,30 @@ function ProjectDetails() {
                         <div className="risk-header">
                           <span className="risk-title">{risk.title}</span>
                           <span className={`severity-badge ${getSeverityClass(risk.severity)}`}>
-                            {risk.severity}
+                            {getSeverityLabel(risk.severity)}
                           </span>
                         </div>
                         {risk.mitigation && (
                           <p className="risk-mitigation">
-                            <strong>Mitigation:</strong> {risk.mitigation}
+                            <strong>Mitigazione:</strong> {risk.mitigation}
                           </p>
                         )}
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p className="empty-message">No risks identified yet.</p>
+                  <p className="empty-message">Nessun rischio identificato.</p>
                 )}
               </div>
             </section>
           </div>
 
           <div className="side-column">
-            {/* Files / Documents */}
+            {/* File / Documenti */}
             <section className="details-section">
               <div className="section-header">
-                <h2 className="section-title">Files / Documents</h2>
-                <button className="btn-add btn-add-small">Upload</button>
+                <h2 className="section-title">File / Documenti</h2>
+                <button className="btn-add btn-add-small">Carica</button>
               </div>
               <div className="documents-card">
                 {project.documents && project.documents.length > 0 ? (
@@ -287,7 +328,7 @@ function ProjectDetails() {
                     ))}
                   </div>
                 ) : (
-                  <p className="empty-message">No documents uploaded yet.</p>
+                  <p className="empty-message">Nessun documento caricato.</p>
                 )}
               </div>
             </section>
@@ -295,26 +336,26 @@ function ProjectDetails() {
         </div>
       </div>
 
-      {/* Add Milestone Modal */}
+      {/* Modal Aggiungi Milestone */}
       <Modal
         isOpen={isMilestoneModalOpen}
         onClose={() => setIsMilestoneModalOpen(false)}
-        title="Add Milestone"
+        title="Aggiungi Milestone"
         size="small"
       >
         <form className="add-form" onSubmit={handleAddMilestone}>
           <div className="form-group">
-            <label>Milestone Name</label>
+            <label>Nome Milestone</label>
             <input
               type="text"
               value={newMilestone.name}
               onChange={(e) => setNewMilestone({ ...newMilestone, name: e.target.value })}
-              placeholder="e.g., Foundation pour"
+              placeholder="es. Getto fondazioni"
               required
             />
           </div>
           <div className="form-group">
-            <label>Due Date</label>
+            <label>Data Scadenza</label>
             <input
               type="date"
               value={newMilestone.dueDate}
@@ -323,68 +364,68 @@ function ProjectDetails() {
             />
           </div>
           <div className="form-group">
-            <label>Status</label>
+            <label>Stato</label>
             <select
               value={newMilestone.status}
               onChange={(e) => setNewMilestone({ ...newMilestone, status: e.target.value })}
             >
-              <option value="Not Started">Not Started</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Done">Done</option>
+              <option value="Not Started">Non Iniziato</option>
+              <option value="In Progress">In Corso</option>
+              <option value="Done">Completato</option>
             </select>
           </div>
           <div className="form-actions">
             <button type="button" className="btn-secondary" onClick={() => setIsMilestoneModalOpen(false)}>
-              Cancel
+              Annulla
             </button>
-            <button type="submit" className="btn-primary">Add Milestone</button>
+            <button type="submit" className="btn-primary">Aggiungi Milestone</button>
           </div>
         </form>
       </Modal>
 
-      {/* Add Risk Modal */}
+      {/* Modal Aggiungi Rischio */}
       <Modal
         isOpen={isRiskModalOpen}
         onClose={() => setIsRiskModalOpen(false)}
-        title="Add Risk"
+        title="Aggiungi Rischio"
         size="medium"
       >
         <form className="add-form" onSubmit={handleAddRisk}>
           <div className="form-group">
-            <label>Risk Title</label>
+            <label>Titolo Rischio</label>
             <input
               type="text"
               value={newRisk.title}
               onChange={(e) => setNewRisk({ ...newRisk, title: e.target.value })}
-              placeholder="e.g., Permit approval delay"
+              placeholder="es. Ritardo approvazione permessi"
               required
             />
           </div>
           <div className="form-group">
-            <label>Severity</label>
+            <label>Gravità</label>
             <select
               value={newRisk.severity}
               onChange={(e) => setNewRisk({ ...newRisk, severity: e.target.value })}
             >
-              <option value="Low">Low</option>
-              <option value="Medium">Medium</option>
-              <option value="High">High</option>
+              <option value="Low">Basso</option>
+              <option value="Medium">Medio</option>
+              <option value="High">Alto</option>
             </select>
           </div>
           <div className="form-group">
-            <label>Mitigation</label>
+            <label>Mitigazione</label>
             <textarea
               value={newRisk.mitigation}
               onChange={(e) => setNewRisk({ ...newRisk, mitigation: e.target.value })}
-              placeholder="Describe mitigation strategy..."
+              placeholder="Descrivi la strategia di mitigazione..."
               rows={3}
             />
           </div>
           <div className="form-actions">
             <button type="button" className="btn-secondary" onClick={() => setIsRiskModalOpen(false)}>
-              Cancel
+              Annulla
             </button>
-            <button type="submit" className="btn-primary">Add Risk</button>
+            <button type="submit" className="btn-primary">Aggiungi Rischio</button>
           </div>
         </form>
       </Modal>

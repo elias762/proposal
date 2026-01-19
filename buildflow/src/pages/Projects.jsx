@@ -33,15 +33,30 @@ function Projects() {
     }
   };
 
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case 'On Track':
+        return 'In Linea';
+      case 'At Risk':
+        return 'A Rischio';
+      case 'Delayed':
+        return 'In Ritardo';
+      case 'Completed':
+        return 'Completato';
+      default:
+        return status;
+    }
+  };
+
   const getTypeClass = (type) => {
     switch (type) {
-      case 'Residential':
+      case 'Residenziale':
         return 'type-residential';
-      case 'Commercial':
+      case 'Commerciale':
         return 'type-commercial';
-      case 'Renovation':
+      case 'Ristrutturazione':
         return 'type-renovation';
-      case 'Infrastructure':
+      case 'Infrastrutture':
         return 'type-infrastructure';
       default:
         return '';
@@ -51,7 +66,7 @@ function Projects() {
   const formatDate = (dateStr) => {
     if (!dateStr) return '-';
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', {
+    return date.toLocaleDateString('it-IT', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
@@ -60,7 +75,7 @@ function Projects() {
 
   const formatBudget = (budget) => {
     if (typeof budget === 'number') {
-      return `€${budget.toLocaleString('de-DE')}`;
+      return `€${budget.toLocaleString('it-IT')}`;
     }
     return budget;
   };
@@ -72,8 +87,8 @@ function Projects() {
   return (
     <div className="projects-page">
       <Header
-        title="Projects"
-        subtitle="Plan, track, and review construction projects."
+        title="Progetti"
+        subtitle="Pianifica, monitora e revisiona i progetti edilizi."
       />
 
       <div className="projects-content">
@@ -85,13 +100,17 @@ function Projects() {
             </svg>
             <input
               type="text"
-              placeholder="Search by project name or client..."
+              placeholder="Cerca per nome progetto o cliente..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
           <button className="btn-new-project" onClick={() => setIsModalOpen(true)}>
-            + New Project
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Nuovo Progetto
           </button>
         </div>
 
@@ -100,12 +119,12 @@ function Projects() {
             <table className="projects-table">
               <thead>
                 <tr>
-                  <th>Project Name</th>
-                  <th>Client</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>Start Date</th>
-                  <th>Target End</th>
+                  <th>Nome Progetto</th>
+                  <th>Cliente</th>
+                  <th>Tipologia</th>
+                  <th>Stato</th>
+                  <th>Data Inizio</th>
+                  <th>Data Fine</th>
                   <th>Budget</th>
                   <th>Project Manager</th>
                 </tr>
@@ -126,7 +145,7 @@ function Projects() {
                     </td>
                     <td>
                       <span className={`status-badge ${getStatusClass(project.status)}`}>
-                        {project.status}
+                        {getStatusLabel(project.status)}
                       </span>
                     </td>
                     <td>{formatDate(project.startDate)}</td>
@@ -139,7 +158,7 @@ function Projects() {
             </table>
             {filteredProjects.length === 0 && (
               <div className="no-results">
-                <p>No projects found matching "{searchTerm}"</p>
+                <p>Nessun progetto trovato per "{searchTerm}"</p>
               </div>
             )}
           </div>
@@ -149,7 +168,7 @@ function Projects() {
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Create New Project"
+        title="Crea Nuovo Progetto"
         size="large"
       >
         <NewProjectForm onClose={() => setIsModalOpen(false)} />

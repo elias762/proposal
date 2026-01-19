@@ -77,7 +77,7 @@ function Analytics() {
   return (
     <div className="analytics-page">
       <Header
-        title="Analytics"
+        title="Analisi"
         subtitle="Metriche di business e performance dei progetti"
       />
 

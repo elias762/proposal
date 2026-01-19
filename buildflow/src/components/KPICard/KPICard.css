@@ -1,63 +1,66 @@
 .kpi-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 20px 24px;
+  background-color: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   display: flex;
   align-items: center;
-  gap: 16px;
-  border: 1px solid #e5e7eb;
-  transition: box-shadow 0.15s ease;
+  gap: var(--spacing-md);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
+  border: 1px solid transparent;
 }
 
 .kpi-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 
 .kpi-card-alert {
-  border-left: 4px solid #f59e0b;
+  border-left: 4px solid var(--color-warning);
 }
 
 .kpi-icon {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #eff6ff;
-  border-radius: 10px;
+  background-color: var(--color-accent-light);
+  border-radius: var(--radius-md);
   flex-shrink: 0;
 }
 
 .kpi-icon svg {
-  width: 24px;
-  height: 24px;
-  stroke: #3b82f6;
+  width: 26px;
+  height: 26px;
+  stroke: var(--color-accent);
+  stroke-width: 1.5;
 }
 
 .kpi-icon-alert {
-  background-color: #fef3c7;
+  background-color: rgba(255, 159, 10, 0.12);
 }
 
 .kpi-icon-alert svg {
-  stroke: #d97706;
+  stroke: var(--color-warning);
 }
 
 .kpi-content {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: var(--spacing-xs);
 }
 
 .kpi-value {
-  font-size: 28px;
-  font-weight: 700;
-  color: #111827;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: var(--line-height-tight);
 }
 
 .kpi-title {
-  font-size: 13px;
-  color: #6b7280;
-  font-weight: 500;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
 }

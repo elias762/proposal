@@ -43,11 +43,11 @@ function NewProjectForm({ onClose }) {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Project name is required';
-    if (!formData.budget) newErrors.budget = 'Budget is required';
-    if (!formData.client) newErrors.client = 'Client is required';
-    if (!formData.type) newErrors.type = 'Project type is required';
-    if (!formData.projectManager) newErrors.projectManager = 'Project manager is required';
+    if (!formData.name.trim()) newErrors.name = 'Il nome del progetto è obbligatorio';
+    if (!formData.budget) newErrors.budget = 'Il budget è obbligatorio';
+    if (!formData.client) newErrors.client = 'Il cliente è obbligatorio';
+    if (!formData.type) newErrors.type = 'La tipologia è obbligatoria';
+    if (!formData.projectManager) newErrors.projectManager = 'Il project manager è obbligatorio';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -68,21 +68,21 @@ function NewProjectForm({ onClose }) {
     <form className="new-project-form" onSubmit={handleSubmit}>
       <div className="form-grid">
         <div className="form-group form-group-full">
-          <label htmlFor="name">Project Name *</label>
+          <label htmlFor="name">Nome Progetto *</label>
           <input
             type="text"
             id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="e.g., Downtown Office Renovation"
+            placeholder="es. Ristrutturazione Uffici Centro"
             className={errors.name ? 'input-error' : ''}
           />
           {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="client">Client *</label>
+          <label htmlFor="client">Cliente *</label>
           <select
             id="client"
             name="client"
@@ -90,7 +90,7 @@ function NewProjectForm({ onClose }) {
             onChange={handleChange}
             className={errors.client ? 'input-error' : ''}
           >
-            <option value="">Select client</option>
+            <option value="">Seleziona cliente</option>
             {clientsData.map((client) => (
               <option key={client.id} value={client.name}>
                 {client.name}
@@ -101,7 +101,7 @@ function NewProjectForm({ onClose }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="type">Project Type *</label>
+          <label htmlFor="type">Tipologia Progetto *</label>
           <select
             id="type"
             name="type"
@@ -109,7 +109,7 @@ function NewProjectForm({ onClose }) {
             onChange={handleChange}
             className={errors.type ? 'input-error' : ''}
           >
-            <option value="">Select type</option>
+            <option value="">Seleziona tipologia</option>
             {projectTypesData.map((type) => (
               <option key={type} value={type}>
                 {type}
@@ -120,14 +120,14 @@ function NewProjectForm({ onClose }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="location">Location</label>
+          <label htmlFor="location">Località</label>
           <input
             type="text"
             id="location"
             name="location"
             value={formData.location}
             onChange={handleChange}
-            placeholder="e.g., Munich, DE"
+            placeholder="es. Milano, Italia"
           />
         </div>
 
@@ -140,7 +140,7 @@ function NewProjectForm({ onClose }) {
             onChange={handleChange}
             className={errors.projectManager ? 'input-error' : ''}
           >
-            <option value="">Select manager</option>
+            <option value="">Seleziona manager</option>
             {projectManagersData.map((pm) => (
               <option key={pm.id} value={pm.name}>
                 {pm.name}
@@ -153,7 +153,7 @@ function NewProjectForm({ onClose }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="startDate">Start Date</label>
+          <label htmlFor="startDate">Data Inizio</label>
           <input
             type="date"
             id="startDate"
@@ -164,7 +164,7 @@ function NewProjectForm({ onClose }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="targetEndDate">Target End Date</label>
+          <label htmlFor="targetEndDate">Data Fine Prevista</label>
           <input
             type="date"
             id="targetEndDate"
@@ -182,26 +182,26 @@ function NewProjectForm({ onClose }) {
             name="budget"
             value={formData.budget}
             onChange={handleChange}
-            placeholder="e.g., 500000"
+            placeholder="es. 500000"
             className={errors.budget ? 'input-error' : ''}
           />
           {errors.budget && <span className="error-message">{errors.budget}</span>}
         </div>
 
         <div className="form-group form-group-full">
-          <label htmlFor="scopeSummary">Scope Summary</label>
+          <label htmlFor="scopeSummary">Descrizione Progetto</label>
           <textarea
             id="scopeSummary"
             name="scopeSummary"
             value={formData.scopeSummary}
             onChange={handleChange}
-            placeholder="Brief description of project scope and objectives..."
+            placeholder="Breve descrizione dell'ambito e degli obiettivi del progetto..."
             rows={3}
           />
         </div>
 
         <div className="form-group form-group-full">
-          <label>Key Constraints</label>
+          <label>Vincoli Principali</label>
           <div className="constraints-grid">
             {constraintsData.map((constraint) => (
               <button
@@ -221,10 +221,10 @@ function NewProjectForm({ onClose }) {
 
       <div className="form-actions">
         <button type="button" className="btn-secondary" onClick={onClose}>
-          Cancel
+          Annulla
         </button>
         <button type="submit" className="btn-primary">
-          Create Project
+          Crea Progetto
         </button>
       </div>
     </form>

@@ -9,20 +9,37 @@ function ProjectsTable({ projects }) {
         return 'status-at-risk';
       case 'Delayed':
         return 'status-delayed';
+      case 'Completed':
+        return 'status-completed';
       default:
         return '';
     }
   };
 
+  const getStatusLabel = (status) => {
+    switch (status) {
+      case 'On Track':
+        return 'In Linea';
+      case 'At Risk':
+        return 'A Rischio';
+      case 'Delayed':
+        return 'In Ritardo';
+      case 'Completed':
+        return 'Completato';
+      default:
+        return status;
+    }
+  };
+
   const getTypeClass = (type) => {
     switch (type) {
-      case 'Residential':
+      case 'Residenziale':
         return 'type-residential';
-      case 'Commercial':
+      case 'Commerciale':
         return 'type-commercial';
-      case 'Renovation':
+      case 'Ristrutturazione':
         return 'type-renovation';
-      case 'Infrastructure':
+      case 'Infrastrutture':
         return 'type-infrastructure';
       default:
         return '';
@@ -30,8 +47,9 @@ function ProjectsTable({ projects }) {
   };
 
   const formatDate = (dateStr) => {
+    if (!dateStr) return '-';
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-GB', {
+    return date.toLocaleDateString('it-IT', {
       day: 'numeric',
       month: 'short',
       year: 'numeric',
@@ -43,12 +61,12 @@ function ProjectsTable({ projects }) {
       <table className="projects-table">
         <thead>
           <tr>
-            <th>Project Name</th>
-            <th>Client</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Start Date</th>
-            <th>Target End</th>
+            <th>Nome Progetto</th>
+            <th>Cliente</th>
+            <th>Tipologia</th>
+            <th>Stato</th>
+            <th>Data Inizio</th>
+            <th>Data Fine</th>
             <th>Budget</th>
             <th>Project Manager</th>
           </tr>
@@ -65,7 +83,7 @@ function ProjectsTable({ projects }) {
               </td>
               <td>
                 <span className={`status-badge ${getStatusClass(project.status)}`}>
-                  {project.status}
+                  {getStatusLabel(project.status)}
                 </span>
               </td>
               <td>{formatDate(project.startDate)}</td>

@@ -1,13 +1,14 @@
 .activity-feed {
   display: flex;
   flex-direction: column;
+  padding: var(--spacing-md);
 }
 
 .activity-item {
   display: flex;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid #f3f4f6;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .activity-item:last-child {
@@ -15,60 +16,61 @@
 }
 
 .activity-icon {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   flex-shrink: 0;
 }
 
 .activity-icon svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.5;
 }
 
 .activity-icon-update {
-  background-color: #eff6ff;
+  background-color: var(--color-accent-light);
 }
 .activity-icon-update svg {
-  stroke: #3b82f6;
+  stroke: var(--color-accent);
 }
 
 .activity-icon-order {
-  background-color: #f3f4f6;
+  background-color: var(--color-bg-secondary);
 }
 .activity-icon-order svg {
-  stroke: #6b7280;
+  stroke: var(--color-text-secondary);
 }
 
 .activity-icon-invoice {
-  background-color: #f0fdf4;
+  background-color: rgba(52, 199, 89, 0.12);
 }
 .activity-icon-invoice svg {
-  stroke: #22c55e;
+  stroke: var(--color-success);
 }
 
 .activity-icon-risk {
-  background-color: #fef3c7;
+  background-color: rgba(255, 159, 10, 0.12);
 }
 .activity-icon-risk svg {
-  stroke: #d97706;
+  stroke: var(--color-warning);
 }
 
 .activity-icon-team {
-  background-color: #ede9fe;
+  background-color: rgba(175, 82, 222, 0.12);
 }
 .activity-icon-team svg {
-  stroke: #7c3aed;
+  stroke: #af52de;
 }
 
 .activity-icon-milestone {
-  background-color: #d1fae5;
+  background-color: rgba(52, 199, 89, 0.12);
 }
 .activity-icon-milestone svg {
-  stroke: #059669;
+  stroke: var(--color-success);
 }
 
 .activity-content {
@@ -80,12 +82,12 @@
 }
 
 .activity-message {
-  font-size: 13px;
-  color: #374151;
-  line-height: 1.4;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
 }
 
 .activity-time {
-  font-size: 12px;
-  color: #9ca3af;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
 }

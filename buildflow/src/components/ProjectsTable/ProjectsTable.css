@@ -5,91 +5,105 @@
 .projects-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
 }
 
 .projects-table thead {
-  background-color: #f9fafb;
+  background-color: var(--color-bg-secondary);
 }
 
 .projects-table th {
   text-align: left;
-  padding: 12px 16px;
-  font-weight: 600;
-  color: #6b7280;
-  font-size: 12px;
+  padding: var(--spacing-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .projects-table td {
-  padding: 16px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #374151;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border-light);
+  color: var(--color-text-secondary);
+}
+
+.projects-table tbody tr {
+  transition: background-color var(--transition-fast);
 }
 
 .projects-table tbody tr:hover {
-  background-color: #f9fafb;
+  background-color: var(--color-bg-tertiary);
 }
 
 .project-name {
-  font-weight: 600;
-  color: #111827;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 
 .budget {
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', monospace;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
 }
 
 .status-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
 }
 
 .status-on-track {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: rgba(52, 199, 89, 0.12);
+  color: #248a3d;
 }
 
 .status-at-risk {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: rgba(255, 159, 10, 0.12);
+  color: #b25000;
 }
 
 .status-delayed {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: rgba(255, 59, 48, 0.12);
+  color: #d70015;
+}
+
+.status-completed {
+  background-color: rgba(0, 113, 227, 0.12);
+  color: #0055d4;
 }
 
 .type-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
 }
 
 .type-residential {
-  background-color: #ede9fe;
-  color: #5b21b6;
+  background-color: rgba(175, 82, 222, 0.12);
+  color: #8944ab;
 }
 
 .type-commercial {
-  background-color: #dbeafe;
-  color: #1e40af;
+  background-color: rgba(0, 113, 227, 0.12);
+  color: #0055d4;
 }
 
 .type-renovation {
-  background-color: #fce7f3;
-  color: #9d174d;
+  background-color: rgba(255, 45, 85, 0.12);
+  color: #d30f45;
 }
 
 .type-infrastructure {
-  background-color: #e0e7ff;
-  color: #3730a3;
+  background-color: rgba(88, 86, 214, 0.12);
+  color: #5856d6;
 }

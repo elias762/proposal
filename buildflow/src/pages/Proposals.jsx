@@ -8,7 +8,7 @@ import {
 } from '../utils/proposalGenerator';
 import './Proposals.css';
 
-const scaleOptions = ['Small', 'Medium', 'Large'];
+const scaleOptions = ['Piccolo', 'Medio', 'Grande'];
 const budgetRangeOptions = ['< €100k', '€100k–€300k', '€300k–€800k', '€800k+'];
 const constraintOptions = [
   'Tempistiche strette',
@@ -61,16 +61,16 @@ function Proposals() {
   const validate = () => {
     const newErrors = {};
     if (!formData.requirements.trim()) {
-      newErrors.requirements = 'Requirements are required';
+      newErrors.requirements = 'I requisiti sono obbligatori';
     }
     if (!formData.client) {
-      newErrors.client = 'Client is required';
+      newErrors.client = 'Il cliente è obbligatorio';
     }
     if (!formData.projectType) {
-      newErrors.projectType = 'Project type is required';
+      newErrors.projectType = 'La tipologia è obbligatoria';
     }
     if (!formData.scale) {
-      newErrors.scale = 'Scale is required';
+      newErrors.scale = 'La dimensione è obbligatoria';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -81,9 +81,7 @@ function Proposals() {
 
     setIsGenerating(true);
 
-    // Simulate AI processing delay
     setTimeout(() => {
-      // Find similar projects
       const similar = findSimilarProjects(
         formData.projectType,
         formData.scale,
@@ -91,7 +89,6 @@ function Proposals() {
       );
       setSimilarProjects(similar);
 
-      // Generate proposal
       const generatedProposal = generateProposal(formData, linkedReferences);
       setProposal(generatedProposal);
 
@@ -107,7 +104,6 @@ function Proposals() {
       setLinkedReferences([...linkedReferences, project]);
     }
 
-    // Update proposal if already generated
     if (proposal) {
       const newRefs = isLinked
         ? linkedReferences.filter((r) => r.id !== project.id)
@@ -127,21 +123,20 @@ function Proposals() {
   return (
     <div className="proposals-page">
       <Header
-        title="Proposals (AI)"
-        subtitle="Create tailored proposals from past project experience."
+        title="Preventivi (AI)"
+        subtitle="Genera preventivi professionali basati su progetti storici."
       />
 
       <div className="proposals-content">
         <div className="proposals-grid">
-          {/* Left Column */}
           <div className="left-column">
             <div className="request-card">
-              <h2 className="card-title">New Request</h2>
+              <h2 className="card-title">Nuova Richiesta</h2>
 
               <form className="request-form">
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="client">Client *</label>
+                    <label htmlFor="client">Cliente *</label>
                     <select
                       id="client"
                       name="client"
@@ -149,7 +144,7 @@ function Proposals() {
                       onChange={handleChange}
                       className={errors.client ? 'input-error' : ''}
                     >
-                      <option value="">Select client</option>
+                      <option value="">Seleziona cliente</option>
                       {clientsData.map((client) => (
                         <option key={client.id} value={client.name}>
                           {client.name}
@@ -162,7 +157,7 @@ function Proposals() {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="projectType">Project Type *</label>
+                    <label htmlFor="projectType">Tipologia Progetto *</label>
                     <select
                       id="projectType"
                       name="projectType"
@@ -170,7 +165,7 @@ function Proposals() {
                       onChange={handleChange}
                       className={errors.projectType ? 'input-error' : ''}
                     >
-                      <option value="">Select type</option>
+                      <option value="">Seleziona tipologia</option>
                       {projectTypesData.map((type) => (
                         <option key={type} value={type}>
                           {type}
@@ -185,7 +180,7 @@ function Proposals() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="location">Location</label>
+                    <label htmlFor="location">Ubicazione</label>
                     <input
                       type="text"
                       id="location"
@@ -197,7 +192,7 @@ function Proposals() {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="scale">Size / Scale *</label>
+                    <label htmlFor="scale">Dimensione *</label>
                     <select
                       id="scale"
                       name="scale"
@@ -205,7 +200,7 @@ function Proposals() {
                       onChange={handleChange}
                       className={errors.scale ? 'input-error' : ''}
                     >
-                      <option value="">Select scale</option>
+                      <option value="">Seleziona dimensione</option>
                       {scaleOptions.map((scale) => (
                         <option key={scale} value={scale}>
                           {scale}
@@ -220,7 +215,7 @@ function Proposals() {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="targetStartDate">Target Start Date</label>
+                    <label htmlFor="targetStartDate">Data Inizio Prevista</label>
                     <input
                       type="date"
                       id="targetStartDate"
@@ -231,7 +226,7 @@ function Proposals() {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="targetDeadline">Target Deadline</label>
+                    <label htmlFor="targetDeadline">Scadenza Prevista</label>
                     <input
                       type="date"
                       id="targetDeadline"
@@ -243,14 +238,14 @@ function Proposals() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="budgetRange">Budget Range</label>
+                  <label htmlFor="budgetRange">Range Budget</label>
                   <select
                     id="budgetRange"
                     name="budgetRange"
                     value={formData.budgetRange}
                     onChange={handleChange}
                   >
-                    <option value="">Select range</option>
+                    <option value="">Seleziona range</option>
                     {budgetRangeOptions.map((range) => (
                       <option key={range} value={range}>
                         {range}
@@ -260,7 +255,7 @@ function Proposals() {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="requirements">Requirements *</label>
+                  <label htmlFor="requirements">Requisiti *</label>
                   <textarea
                     id="requirements"
                     name="requirements"
@@ -276,7 +271,7 @@ function Proposals() {
                 </div>
 
                 <div className="form-group">
-                  <label>Constraints</label>
+                  <label>Vincoli</label>
                   <div className="constraints-grid">
                     {constraintOptions.map((constraint) => (
                       <button
@@ -301,7 +296,7 @@ function Proposals() {
                     className="btn-secondary"
                     onClick={handleReset}
                   >
-                    Reset
+                    Ripristina
                   </button>
                   <button
                     type="button"
@@ -312,22 +307,21 @@ function Proposals() {
                     {isGenerating ? (
                       <>
                         <span className="spinner"></span>
-                        Generating...
+                        Generazione...
                       </>
                     ) : (
-                      'Generate Proposal'
+                      'Genera Preventivo'
                     )}
                   </button>
                 </div>
               </form>
             </div>
 
-            {/* Similar Past Projects */}
             {similarProjects.length > 0 && (
               <div className="similar-projects-card">
-                <h2 className="card-title">Similar Past Projects</h2>
+                <h2 className="card-title">Progetti Simili Passati</h2>
                 <p className="card-subtitle">
-                  Select projects to include as references in your proposal.
+                  Seleziona progetti da includere come riferimenti nel preventivo.
                 </p>
 
                 <div className="similar-projects-list">
@@ -350,7 +344,7 @@ function Proposals() {
                             </span>
                           </div>
                           <div className="project-stats">
-                            <span>{project.duration} weeks</span>
+                            <span>{project.duration} settimane</span>
                             <span className="stat-divider">•</span>
                             <span>{formatCurrency(project.cost)}</span>
                           </div>
@@ -362,7 +356,7 @@ function Proposals() {
                           }`}
                           onClick={() => handleLinkReference(project)}
                         >
-                          {isLinked ? '✓ Linked' : 'Link as reference'}
+                          {isLinked ? 'Collegato' : 'Collega'}
                         </button>
                       </div>
                     );
@@ -372,7 +366,6 @@ function Proposals() {
             )}
           </div>
 
-          {/* Right Column - Proposal Draft */}
           <div className="right-column">
             {!proposal && !isGenerating && (
               <div className="proposal-placeholder">
@@ -384,10 +377,10 @@ function Proposals() {
                     <line x1="16" y1="17" x2="8" y2="17" />
                   </svg>
                 </div>
-                <h3>Proposal Draft</h3>
+                <h3>Bozza Preventivo</h3>
                 <p>
-                  Fill out the request form and click "Generate Proposal" to
-                  create an AI-assisted proposal draft.
+                  Compila il modulo e clicca "Genera Preventivo" per
+                  creare una bozza assistita dall'AI.
                 </p>
               </div>
             )}
@@ -395,27 +388,25 @@ function Proposals() {
             {isGenerating && (
               <div className="proposal-loading">
                 <div className="loading-spinner"></div>
-                <h3>Generating Proposal...</h3>
-                <p>Analyzing requirements and past projects...</p>
+                <h3>Generazione Preventivo...</h3>
+                <p>Analisi requisiti e progetti passati...</p>
               </div>
             )}
 
             {proposal && !isGenerating && (
               <div className="proposal-draft">
                 <div className="proposal-header">
-                  <h2 className="proposal-title">Proposal Draft</h2>
-                  <span className="proposal-badge">AI Generated</span>
+                  <h2 className="proposal-title">Bozza Preventivo</h2>
+                  <span className="proposal-badge">Generato con AI</span>
                 </div>
 
-                {/* Executive Summary */}
                 <section className="proposal-section">
-                  <h3 className="section-title">Executive Summary</h3>
+                  <h3 className="section-title">Sintesi Esecutiva</h3>
                   <p className="summary-text">{proposal.executiveSummary}</p>
                 </section>
 
-                {/* Proposed Scope */}
                 <section className="proposal-section">
-                  <h3 className="section-title">Proposed Scope</h3>
+                  <h3 className="section-title">Ambito Proposto</h3>
                   <ul className="scope-list">
                     {proposal.scope.map((item, index) => (
                       <li key={index}>{item}</li>
@@ -423,16 +414,15 @@ function Proposals() {
                   </ul>
                 </section>
 
-                {/* Delivery Plan */}
                 <section className="proposal-section">
-                  <h3 className="section-title">Delivery Plan</h3>
+                  <h3 className="section-title">Piano di Consegna</h3>
                   <div className="phases-list">
                     {proposal.phases.map((phase, index) => (
                       <div key={index} className="phase-item">
                         <div className="phase-header">
                           <span className="phase-name">{phase.name}</span>
                           <span className="phase-duration">
-                            {phase.duration} weeks
+                            {phase.duration} settimane
                           </span>
                         </div>
                         <ul className="phase-activities">
@@ -445,21 +435,20 @@ function Proposals() {
                   </div>
                 </section>
 
-                {/* Timeline Estimate */}
                 <section className="proposal-section">
-                  <h3 className="section-title">Timeline Estimate</h3>
+                  <h3 className="section-title">Stima Tempistiche</h3>
                   <div className="timeline-summary">
                     <div className="total-duration">
-                      <span className="duration-label">Total Duration</span>
+                      <span className="duration-label">Durata Totale</span>
                       <span className="duration-value">
-                        {proposal.timeline.totalDuration} weeks
+                        {proposal.timeline.totalDuration} settimane
                       </span>
                     </div>
                   </div>
 
                   <div className="timeline-details">
                     <div className="timeline-column">
-                      <h4>Key Assumptions</h4>
+                      <h4>Assunzioni Chiave</h4>
                       <ul>
                         {proposal.timeline.assumptions.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -467,7 +456,7 @@ function Proposals() {
                       </ul>
                     </div>
                     <div className="timeline-column">
-                      <h4>Risk Factors</h4>
+                      <h4>Fattori di Rischio</h4>
                       <ul>
                         {proposal.timeline.risks.map((item, i) => (
                           <li key={i}>{item}</li>
@@ -477,12 +466,11 @@ function Proposals() {
                   </div>
                 </section>
 
-                {/* Cost Estimate */}
                 <section className="proposal-section">
-                  <h3 className="section-title">Cost Estimate</h3>
+                  <h3 className="section-title">Stima Costi</h3>
                   <div className="cost-summary">
                     <div className="total-cost">
-                      <span className="cost-label">Total Estimate</span>
+                      <span className="cost-label">Stima Totale</span>
                       <span className="cost-value">
                         {formatCurrency(proposal.costEstimate.total)}
                       </span>
@@ -491,25 +479,25 @@ function Proposals() {
 
                   <div className="cost-breakdown">
                     <div className="cost-item">
-                      <span className="cost-category">Labor</span>
+                      <span className="cost-category">Manodopera</span>
                       <span className="cost-amount">
                         {formatCurrency(proposal.costEstimate.breakdown.labor)}
                       </span>
                     </div>
                     <div className="cost-item">
-                      <span className="cost-category">Materials</span>
+                      <span className="cost-category">Materiali</span>
                       <span className="cost-amount">
                         {formatCurrency(proposal.costEstimate.breakdown.materials)}
                       </span>
                     </div>
                     <div className="cost-item">
-                      <span className="cost-category">Subcontractors</span>
+                      <span className="cost-category">Subappaltatori</span>
                       <span className="cost-amount">
                         {formatCurrency(proposal.costEstimate.breakdown.subcontractors)}
                       </span>
                     </div>
                     <div className="cost-item">
-                      <span className="cost-category">Contingency</span>
+                      <span className="cost-category">Contingenza</span>
                       <span className="cost-amount">
                         {formatCurrency(proposal.costEstimate.breakdown.contingency)}
                       </span>
@@ -519,9 +507,8 @@ function Proposals() {
                   <p className="cost-note">{proposal.costEstimate.note}</p>
                 </section>
 
-                {/* Recommended Next Actions */}
                 <section className="proposal-section">
-                  <h3 className="section-title">Recommended Next Actions</h3>
+                  <h3 className="section-title">Prossimi Passi Raccomandati</h3>
                   <ol className="next-actions-list">
                     {proposal.nextActions.map((action, index) => (
                       <li key={index}>{action}</li>
@@ -529,10 +516,9 @@ function Proposals() {
                   </ol>
                 </section>
 
-                {/* References Included */}
                 {proposal.references.length > 0 && (
                   <section className="proposal-section">
-                    <h3 className="section-title">References Included</h3>
+                    <h3 className="section-title">Riferimenti Inclusi</h3>
                     <div className="references-list">
                       {proposal.references.map((ref) => (
                         <div key={ref.id} className="reference-item">
@@ -540,7 +526,7 @@ function Proposals() {
                           <div className="ref-details">
                             <span>{ref.type}</span>
                             <span className="ref-divider">•</span>
-                            <span>{ref.duration} weeks</span>
+                            <span>{ref.duration} settimane</span>
                             <span className="ref-divider">•</span>
                             <span>{formatCurrency(ref.cost)}</span>
                           </div>
@@ -551,8 +537,8 @@ function Proposals() {
                 )}
 
                 <div className="proposal-footer">
-                  <button className="btn-secondary">Export as PDF</button>
-                  <button className="btn-primary">Save Proposal</button>
+                  <button className="btn-secondary">Esporta PDF</button>
+                  <button className="btn-primary">Salva Preventivo</button>
                 </div>
               </div>
             )}
